@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import asyncImport from "react-imported-component";
 
 import { AuthProvider, useAuth } from "root/hooks/useAuth";
@@ -13,10 +13,10 @@ function InnerApp() {
 
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        {!user && <Route path="/login" component={Login} />}
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {!user && <Route path="/login" element={<Login />} />}
+      </Routes>
     </Router>
   );
 }
