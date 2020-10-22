@@ -1,6 +1,6 @@
-RSpec.configure do |config|
-  BLACKLISTED_FACTORIES = %i[].freeze
+BLACKLISTED_FACTORIES = %i[].freeze
 
+RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do

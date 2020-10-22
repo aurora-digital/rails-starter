@@ -1,3 +1,4 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import "unfetch/polyfill/index";
+
+if (!("fetch" in window)) import("unfetch/polyfill/index");

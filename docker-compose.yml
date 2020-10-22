@@ -1,0 +1,19 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:12
+    volumes:
+      - ./docker-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: secret-postgres-password
+  web:
+    build: .
+    command: bundle exec puma -C config/puma.rb
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: "postgres://postgres:secret-postgres-password@postgres:5432/rails-starter"
+      SECRET_KEY_BASE: super-secret-key-base
+      RAILS_SERVE_STATIC_FILES: "true"

@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 import { useAuth } from "root/hooks/useAuth";
 
-import styles from "./index.css";
+import styles from "./index.module.css";
 
 const Text = asyncImport(() => import("root/components/Text"));
 
-function Home() {
+export default function Home() {
   const { user, handleLogout } = useAuth();
 
   return (
@@ -31,5 +31,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

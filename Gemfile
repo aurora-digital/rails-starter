@@ -6,11 +6,11 @@ ruby "2.6.6"
 gem "administrate"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "pg", ">= 0.18", "< 2.0"
-gem "puma", "~> 4.3"
+gem "puma", "~> 5.0"
 gem "rails", "~> 6.0.3"
 gem "sassc", "~> 2.4.0"
 gem "sorcery"
-gem "webpacker", "~> 5.1.1"
+gem "webpacker", "~> 5.2.1"
 
 group :development, :test do
   gem "dotenv-rails"
@@ -24,7 +24,7 @@ group :development, :test do
 end
 
 group :development do
-  gem "better_errors"
+  gem "better_errors", "2.8.3"
   gem "foreman"
   gem "listen", ">= 3.0.5", "< 3.3"
   gem "rubocop"

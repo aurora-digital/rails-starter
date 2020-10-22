@@ -32,3 +32,6 @@ yarn-debug.log*
 .yarn-integrity
 storybook-static/
 .env
+
+# docker compose stuff
+docker-db

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useForm from "root/hooks/useForm";
 import { useAuth } from "root/hooks/useAuth";
 
-import styles from "./index.css";
+import styles from "./index.module.css";
 
 export default function Login() {
   const { formValues, handleChange } = useForm();

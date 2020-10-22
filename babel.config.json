@@ -17,14 +17,17 @@
         "legacy": true
       }
     ],
-    "@babel/plugin-proposal-class-properties"
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
   ],
   "env": {
     "development": {
       "plugins": [
         "@babel/plugin-transform-react-jsx-source",
-        "react-hot-loader/babel"
+        "react-refresh/babel"
       ]
+    },
+    "stories": {
+      "plugins": ["@babel/plugin-transform-react-jsx-source"]
     }
   }
 }

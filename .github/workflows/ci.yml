@@ -71,6 +71,9 @@ jobs:
           yarn lint-styles
           bundle exec rubocop
 
+      - name: Test and build the storybook
+        run: yarn build-storybook
+
       - name: Build and run tests
         env:
           RAILS_ENV: test

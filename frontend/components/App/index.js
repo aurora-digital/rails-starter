@@ -21,7 +21,7 @@ function InnerApp() {
   );
 }
 
-function App() {
+export default function App() {
   return (
     <React.StrictMode>
       <AuthProvider>
@@ -30,5 +30,3 @@ function App() {
     </React.StrictMode>
   );
 }
-
-export default App;

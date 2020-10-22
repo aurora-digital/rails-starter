@@ -1,11 +1,10 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import Text from "./index";
 
-storiesOf("Text", module).add("default", () => (
-  <Text>I am a piece of simple plain text</Text>
-));
+export default {
+  title: "Text",
+  parameters: {},
+};
 
-storiesOf("Text", module).add("other", () => (
-  <Text>I am other piece of simple plain text</Text>
-));
+export const Basic = () => <Text>I am a piece of plain text.</Text>;
+export const Other = () => <Text>I am other piece of plain text.</Text>;

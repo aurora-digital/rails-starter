@@ -10,7 +10,7 @@ You can replace the app name `railsstarter` with your own name, and use it to se
 
 To run this project you will need the following tools and runtimes:
 
-- Ruby 2.6.4
+- Ruby 2.6.6
 - Node 10.\*
 - Postgres 10 and greater
 - Chromedriver
@@ -31,12 +31,11 @@ The most specialized part of this boilerplate is the frontend build, which is va
 
 We use React as our UI framework, but that can be replaced if need be. With our Webpacker config, the following features are enabled:
 
-- CSS modules. Also includes CSS separation during the production phase, splitting all CSS to a separate bundle
-- All CSS is processed using PostCSS, our plugins allow you to write "SASS like" stylesheets. We also have some experimental features via `postcss-preset-env`. Check the `postcss.config.js` for the plugins in use.
-- Some special rules we use are enabled on the Babel config. **Class properties**, **react-imported-component** which allows us to us the package with the same name to async load React components, and **legacy decorators** for the ocasional high order component. Also, the base `preset-react` and `preset-env` are also enabled. Check `.browserlistrc` to check which browsers are being targeted.
-- `babel-loader` and `file-loader` are configured in the `config/webpack/loaders` folder. You can add more loaders here if needed and they will get loaded by `webpacker`. We deleted all the loaders that come with `webpacker` by default, using our own instead.
-- Code splitting is achieved with the Babel config mentioned above and `react-imported.component`. Check the example frontend app for usage.
-- We also setup `storybook` to mantain the ocasional styleguide. It's configured for React, but again, can be used with other frontend library or framework.
+- All of the frontend building is done by [Webpacker](https://github.com/rails/webpacker). Check their docs for info.
+- Some special rules we use are enabled on the Babel config. **Class properties**, **react-imported-component** which allows us to use the package with the same name to async load React components, and **legacy decorators** for the ocasional high order component. Also, the base `preset-react` and `preset-env` are also enabled. Check `.browserlistrc` to check which browsers are being targeted.
+- Code splitting is achieved with the Babel config mentioned above and `react-imported-component`. Check the example frontend app for usage.
+- `storybook` to mantain the ocasional styleguide. It's configured for React, but again, can be used with other frontend library or framework.
+- Optional `node_modules` transpilation. Visit the `nodeModules.js` on the config folder to add dependencies to the allowlist. Those dependencies will be transpiled.
 
 ### Browser support
 
@@ -72,7 +71,26 @@ Run `bin/setup` to get everything up and running. Then `bin/server` to start ham
 
 Also don't forget to setup the default admin user with `rake populate:admin_user`. The default credentials are `admin@mail.com`, the password being `foobar`.
 
-`react-hot-loader` should reload everything you need as you edit stuff in the `frontend` folder. On the Rails side, everything is interpreted live, so no need to restart the server every time you change code, unless you change configs or initializers.
+`react-refresh` should reload everything you need as you edit stuff in the `frontend` folder. On the Rails side, everything is interpreted live, so no need to restart the server every time you change code, unless you change configs or initializers.
+
+**DISCLAIMER** Check the `react-refresh` docs on [this link](https://reactnative.dev/docs/fast-refresh) (yes it's from `reactnative`, trust us) for limitations on the hot loader. For example, only function components work now.
+
+## Production
+
+This starter is made with Heroku in mind, but if you want to deploy elsewhere we recommend the included Dockerfile (which is meant for production and not development). The Docker image of this repo uses Alpine Linux to produce a very small image. It builds the backend and the frontend serving the assets from the Rails app itself.
+
+You should deploy the image made by this repo to DockerHub, or any other container registry, then on the production server just pull it there. There is a included `docker-compose.yml`. Just change the `build: .` line with `image: your-docker-hub-image` on production.
+There are a couple of important environment variables that need changing, namely the postgres password and Rails secret key base. Use a secure password generator for those.
+
+Then do the usual:
+```
+docker-compose pull
+docker-compose stop # to stop existing containers
+docker-compose up -d
+docker-compose exec web rake db:migrate
+```
+
+You can do the usual `rails console` and regular rake tasks using `docker-compose exec web <your command>`.
 
 # About
 
